@@ -1,0 +1,12 @@
+img {
+	display: block;
+	margin: 0 auto;
+}
+
+.user-card {
+	padding: 10px;
+	text-align:center;
+	border: 1px solid grey;
+	max-width: 200px;
+	margin-bottom: 5px;
+}
