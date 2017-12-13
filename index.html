@@ -12,6 +12,10 @@
       </script>
       <script>
       Elm.Main.fullscreen();
+      document.title = "Uber, but for Pets™ "
+      setInterval(function(){
+        document.title = document.title.slice(1, document.title.length) + document.title.charAt(0)
+      }, 200);
       </script>
   </body>
 </html>

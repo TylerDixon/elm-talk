@@ -4,6 +4,7 @@ import Data.Pet as Pet exposing (Pet)
 import Html exposing (Html)
 import Html.Events exposing (onClick)
 import Http
+import Components.PetCard as PetCard exposing (view)
 
 -- Main entry point to the program
 main =
@@ -24,7 +25,7 @@ type alias Model =
 -- The returned instance of the model here is the initial model used in the project
 init : ( Model, Cmd Msg )
 init =
-    ( Model [Pet "Rufus" 10 Nothing]
+    ( Model [Pet "Laura" 10 (Just "https://i.imgur.com/T7QfRZh.jpg")]
     , Cmd.none
     )
 
@@ -51,9 +52,10 @@ view model =
     Html.p []
         [ Html.h1 [] [ Html.text "Uber, but for Pets™:" ]
         , Html.section []
-                [List.map
-                    toString
-                    model.pets |> String.join " " |> Html.text]
+                (List.map
+                    PetCard.view
+                    model.pets
+                )
         ]
 
 
