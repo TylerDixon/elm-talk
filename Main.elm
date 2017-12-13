@@ -26,8 +26,8 @@ type alias Model =
 -- The returned instance of the model here is the initial model used in the project
 init : ( Model, Cmd Msg )
 init =
-    ( Model [Pet "Laura" 10 (Just "https://i.imgur.com/T7QfRZh.jpg")] False
-    , Cmd.none
+    ( Model [] False
+    , Pet.getAll PetLoaded
     )
 
 
@@ -38,6 +38,7 @@ type Msg
     = NoOp
     | HidePets
     | ShowPets
+    | PetLoaded (Result Http.Error (List Pet))
 
 -- A function to respond to these types of events
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -45,6 +46,15 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+            
+        PetLoaded result ->
+            case result of
+                Ok petList ->
+                    { model | pets = petList } ! []
+
+                Err err ->
+                    model ! [] -- Don't do this, it makes you a bad person
+                    -- I'm a bad person :(
         HidePets ->
             { model | petsHidden = True } ! []
         ShowPets ->

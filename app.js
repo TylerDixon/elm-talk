@@ -5,18 +5,19 @@ http
 		res.end(
 			JSON.stringify([
 				{
-					name: 'séléna marchand',
-					email: 'séléna.marchand@example.com',
-					picture: 'https://randomuser.me/api/portraits/women/18.jpg'
+					name: 'Laura',
+					availableIn: 10,
+					picture: 'https://i.imgur.com/T7QfRZh.jpg'
 				},
 				{
-					name: 'milagros soler',
-					email: 'milagros.soler@example.com'
+					name: 'Jimmy',
+					availableIn: 5,
+					picture: 'https://i.imgur.com/Vcvp6Zs.jpg'
+
 				},
 				{
-					name: 'harvey young' ,
-					email: 'harvey.young@example.com',
-					picture: 'https://randomuser.me/api/portraits/men/86.jpg'
+					name: 'Michael J. Fox' ,
+					availableIn: 45
 				}
 			])
 		);
