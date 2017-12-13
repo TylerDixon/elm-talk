@@ -20,12 +20,13 @@ main =
 -- MODEL
 type alias Model =
     { pets : List Pet
+    , petsHidden : Bool
     }
 
 -- The returned instance of the model here is the initial model used in the project
 init : ( Model, Cmd Msg )
 init =
-    ( Model [Pet "Laura" 10 (Just "https://i.imgur.com/T7QfRZh.jpg")]
+    ( Model [Pet "Laura" 10 (Just "https://i.imgur.com/T7QfRZh.jpg")] False
     , Cmd.none
     )
 
@@ -35,6 +36,8 @@ init =
 -- Types of events that can occur in the application
 type Msg
     = NoOp
+    | HidePets
+    | ShowPets
 
 -- A function to respond to these types of events
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -42,6 +45,10 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+        HidePets ->
+            { model | petsHidden = True } ! []
+        ShowPets ->
+            { model | petsHidden = False } ! []
 
 
 
@@ -51,11 +58,15 @@ view : Model -> Html Msg
 view model =
     Html.p []
         [ Html.h1 [] [ Html.text "Uber, but for Pets™:" ]
-        , Html.section []
+        , if not model.petsHidden then
+            Html.div [] [Html.button [ onClick HidePets ] [ Html.text "Hide Pets" ]
+            , Html.section []
                 (List.map
                     PetCard.view
                     model.pets
-                )
+                )]
+          else
+            Html.button [ onClick ShowPets ] [ Html.text "Show Pets" ]
         ]
 
 
